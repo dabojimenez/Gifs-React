@@ -5,7 +5,7 @@ import { GifGrid } from "./components/GifGrid";
 export const GifExpertApp = () => {
 
     // siempre debemos inicializarlo, en este caso como un arreglo
-    const [categories, setCategories] = useState(['Metallica'])
+    const [categories, setCategories] = useState(['One Piece'])
 
     const onAddCategory = (newCategory) => {
         // console.log('Valorant');

@@ -1,31 +1,32 @@
-import { useEffect, useState } from "react";
-import { getGifs } from "../helpers/getGifs";
 import { GifItem } from "./GifItem";
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
 export const GifGrid = ({ category }) => {
 
-    // const [counter, setCounter] = useState(10)
-    const [images, setImages] = useState([])
-    const getImagenes = async () => {
-        const newImages = await getGifs(category);
-        setImages(newImages)
-    }
-    //cuando se renderice por primera vez, solo ahi realizaremos la peticion http
-    //recibe dos argumentos, 
-    //1 el efecto que queremos disparar,qe es un callback
-    //2 liosta de dependencias, que son las condiciones en las cuales  queremos ejecutar el calback, el cual es opcional pero se recomienda enviar
-    useEffect( () => {
-        // getGifs(category);
-        getImagenes();
-        //si yo dejo la lista de dependencias vacias, quiere decir q solo se va a disparar la primera vez que se crea nuestro componente
-    }, [] )
-    // getGifs(category);
+    const { images, isLoading} = useFetchGifs(category);
+
+    // console.log({images, isLoading});
+    
 
     return (
         <>
             <h3>{category}</h3>
             {/* <h5>{counter}</h5> */}
             {/* <button onClick={() => setCounter(counter + 1)}>+1</button> */}
+            {/* Cargar el isloading */}
+            {/* Primera forma de usar el isloading */}
+            {/* {
+                isLoading
+                ? (<h2>Cargando...</h2>)
+                : null
+            } */}
+            {
+                isLoading && (<h2>Cargando...</h2>)
+            }
+            
+            {/* Segunda forma de usar el isloading */}
+            {/* podriamos crear un nuevo componente que se encargue de la logica de mostrar el mensaje de cargando */}
+
             <div className="card-grid">
                 {
                     images.map( (image) => (
